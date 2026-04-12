@@ -1,0 +1,30 @@
+//! Advanced topics and future-expansion roadmap.
+
+pub mod advanced_number_theory;
+pub mod algebra_polynomial;
+pub mod algorithm_design;
+pub mod backtracking_topics;
+pub mod bit_manipulation_topics;
+pub mod computational_techniques;
+pub mod convex_hull_trick;
+pub mod disjoint_set_advanced;
+pub mod dynamic_programming;
+pub mod game_theory;
+pub mod graphs;
+pub mod graph_specialized;
+pub mod greedy_topics;
+pub mod lowest_common_ancestor;
+pub mod max_flow;
+pub mod math_topics;
+pub mod misc_topics;
+pub mod practical_topics;
+pub mod problem_solving_patterns;
+pub mod range_queries;
+pub mod sparse_table;
+pub mod strings;
+pub mod string_ultra_advanced;
+pub mod syllabus;
+pub mod searching_topics;
+pub mod tree_extensions;
+pub mod trees;
+pub mod trie_topics;
