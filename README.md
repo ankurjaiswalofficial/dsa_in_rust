@@ -1,6 +1,6 @@
 # Rust DSA Encyclopedia
 
-`project1` is a Rust-based data structures and algorithms learning repository.
+`dsa_in_rust` is a Rust-based data structures and algorithms learning repository.
 The codebase is organized as a curriculum, not as random snippets. Each topic is
 meant to be read in this order:
 
@@ -36,10 +36,10 @@ moving toward competitive-programming and interview-level advanced topics.
 ### Phase 0: Setup And Thinking Style
 
 Start here:
-- [src/basics/programming.rs](D:\RustProjects\Project1\src\basics\programming.rs)
-- [src/basics/complexity.rs](D:\RustProjects\Project1\src\basics\complexity.rs)
-- [src/basics/problem_solving.rs](D:\RustProjects\Project1\src\basics\problem_solving.rs)
-- [src/basics/recursion.rs](D:\RustProjects\Project1\src\basics\recursion.rs)
+- [src/basics/programming.rs](D:\RustProjects\dsa_in_rust\src\basics\programming.rs)
+- [src/basics/complexity.rs](D:\RustProjects\dsa_in_rust\src\basics\complexity.rs)
+- [src/basics/problem_solving.rs](D:\RustProjects\dsa_in_rust\src\basics\problem_solving.rs)
+- [src/basics/recursion.rs](D:\RustProjects\dsa_in_rust\src\basics\recursion.rs)
 
 Learn in this order:
 1. Basics of programming
@@ -55,12 +55,12 @@ Goal of this phase:
 ### Phase 1: Core Linear Structures
 
 Study these next:
-- [src/algorithms/arrays.rs](D:\RustProjects\Project1\src\algorithms\arrays.rs)
-- [src/algorithms/string_algorithms.rs](D:\RustProjects\Project1\src\algorithms\string_algorithms.rs)
-- [src/data_structures/linked_list.rs](D:\RustProjects\Project1\src\data_structures\linked_list.rs)
-- [src/data_structures/stack.rs](D:\RustProjects\Project1\src\data_structures\stack.rs)
-- [src/data_structures/queue.rs](D:\RustProjects\Project1\src\data_structures\queue.rs)
-- [src/data_structures/deque.rs](D:\RustProjects\Project1\src\data_structures\deque.rs)
+- [src/algorithms/arrays.rs](D:\RustProjects\dsa_in_rust\src\algorithms\arrays.rs)
+- [src/algorithms/string_algorithms.rs](D:\RustProjects\dsa_in_rust\src\algorithms\string_algorithms.rs)
+- [src/data_structures/linked_list.rs](D:\RustProjects\dsa_in_rust\src\data_structures\linked_list.rs)
+- [src/data_structures/stack.rs](D:\RustProjects\dsa_in_rust\src\data_structures\stack.rs)
+- [src/data_structures/queue.rs](D:\RustProjects\dsa_in_rust\src\data_structures\queue.rs)
+- [src/data_structures/deque.rs](D:\RustProjects\dsa_in_rust\src\data_structures\deque.rs)
 
 Suggested order inside this phase:
 1. Arrays
@@ -82,11 +82,11 @@ Topics covered here include:
 ### Phase 2: Fundamental Trees, Hashing, And Heaps
 
 Study these after Phase 1:
-- [src/data_structures/binary_tree.rs](D:\RustProjects\Project1\src\data_structures\binary_tree.rs)
-- [src/data_structures/binary_search_tree.rs](D:\RustProjects\Project1\src\data_structures\binary_search_tree.rs)
-- [src/data_structures/heap.rs](D:\RustProjects\Project1\src\data_structures\heap.rs)
-- [src/data_structures/hashing.rs](D:\RustProjects\Project1\src\data_structures\hashing.rs)
-- [src/data_structures/trie.rs](D:\RustProjects\Project1\src\data_structures\trie.rs)
+- [src/data_structures/binary_tree.rs](D:\RustProjects\dsa_in_rust\src\data_structures\binary_tree.rs)
+- [src/data_structures/binary_search_tree.rs](D:\RustProjects\dsa_in_rust\src\data_structures\binary_search_tree.rs)
+- [src/data_structures/heap.rs](D:\RustProjects\dsa_in_rust\src\data_structures\heap.rs)
+- [src/data_structures/hashing.rs](D:\RustProjects\dsa_in_rust\src\data_structures\hashing.rs)
+- [src/data_structures/trie.rs](D:\RustProjects\dsa_in_rust\src\data_structures\trie.rs)
 
 Suggested order:
 1. Binary tree
@@ -103,12 +103,12 @@ Topics covered here include:
 ### Phase 3: Standard Algorithms
 
 Now move to the classic algorithm families:
-- [src/algorithms/searching.rs](D:\RustProjects\Project1\src\algorithms\searching.rs)
-- [src/algorithms/sorting.rs](D:\RustProjects\Project1\src\algorithms\sorting.rs)
-- [src/algorithms/graph.rs](D:\RustProjects\Project1\src\algorithms\graph.rs)
-- [src/algorithms/greedy.rs](D:\RustProjects\Project1\src\algorithms\greedy.rs)
-- [src/algorithms/math.rs](D:\RustProjects\Project1\src\algorithms\math.rs)
-- [src/algorithms/bit_manipulation.rs](D:\RustProjects\Project1\src\algorithms\bit_manipulation.rs)
+- [src/algorithms/searching.rs](D:\RustProjects\dsa_in_rust\src\algorithms\searching.rs)
+- [src/algorithms/sorting.rs](D:\RustProjects\dsa_in_rust\src\algorithms\sorting.rs)
+- [src/algorithms/graph.rs](D:\RustProjects\dsa_in_rust\src\algorithms\graph.rs)
+- [src/algorithms/greedy.rs](D:\RustProjects\dsa_in_rust\src\algorithms\greedy.rs)
+- [src/algorithms/math.rs](D:\RustProjects\dsa_in_rust\src\algorithms\math.rs)
+- [src/algorithms/bit_manipulation.rs](D:\RustProjects\dsa_in_rust\src\algorithms\bit_manipulation.rs)
 
 Suggested order:
 1. Searching
@@ -132,10 +132,10 @@ These should be studied alongside the previous phases, but they become much
 more useful once arrays and searching feel natural.
 
 Read:
-- [src/patterns/prefix_sum.rs](D:\RustProjects\Project1\src\patterns\prefix_sum.rs)
-- [src/patterns/sliding_window.rs](D:\RustProjects\Project1\src\patterns\sliding_window.rs)
-- [src/patterns/two_pointers.rs](D:\RustProjects\Project1\src\patterns\two_pointers.rs)
-- [src/patterns/monotonic_stack.rs](D:\RustProjects\Project1\src\patterns\monotonic_stack.rs)
+- [src/patterns/prefix_sum.rs](D:\RustProjects\dsa_in_rust\src\patterns\prefix_sum.rs)
+- [src/patterns/sliding_window.rs](D:\RustProjects\dsa_in_rust\src\patterns\sliding_window.rs)
+- [src/patterns/two_pointers.rs](D:\RustProjects\dsa_in_rust\src\patterns\two_pointers.rs)
+- [src/patterns/monotonic_stack.rs](D:\RustProjects\dsa_in_rust\src\patterns\monotonic_stack.rs)
 
 Goal of this phase:
 - stop memorizing problems by name
@@ -146,8 +146,8 @@ Goal of this phase:
 Do this only after recursion, arrays, and complexity are comfortable.
 
 Read:
-- [src/algorithms/dynamic_programming.rs](D:\RustProjects\Project1\src\algorithms\dynamic_programming.rs)
-- [src/algorithms/backtracking.rs](D:\RustProjects\Project1\src\algorithms\backtracking.rs)
+- [src/algorithms/dynamic_programming.rs](D:\RustProjects\dsa_in_rust\src\algorithms\dynamic_programming.rs)
+- [src/algorithms/backtracking.rs](D:\RustProjects\dsa_in_rust\src\algorithms\backtracking.rs)
 
 Suggested order:
 1. Memoization
@@ -166,9 +166,9 @@ Suggested order:
 ### Phase 6: Intermediate Data Structures
 
 These are extremely useful before starting the advanced folder in depth:
-- [src/data_structures/disjoint_set.rs](D:\RustProjects\Project1\src\data_structures\disjoint_set.rs)
-- [src/data_structures/fenwick_tree.rs](D:\RustProjects\Project1\src\data_structures\fenwick_tree.rs)
-- [src/data_structures/segment_tree.rs](D:\RustProjects\Project1\src\data_structures\segment_tree.rs)
+- [src/data_structures/disjoint_set.rs](D:\RustProjects\dsa_in_rust\src\data_structures\disjoint_set.rs)
+- [src/data_structures/fenwick_tree.rs](D:\RustProjects\dsa_in_rust\src\data_structures\fenwick_tree.rs)
+- [src/data_structures/segment_tree.rs](D:\RustProjects\dsa_in_rust\src\data_structures\segment_tree.rs)
 
 Study order:
 1. Disjoint set union
@@ -182,10 +182,10 @@ Only start this section after the core phases above feel natural.
 ### Step 1: Advanced Trees, Trie, And Range Queries
 
 Start with:
-- [src/advanced/trees](D:\RustProjects\Project1\src\advanced\trees\mod.rs)
-- [src/advanced/trie_topics](D:\RustProjects\Project1\src\advanced\trie_topics\mod.rs)
-- [src/advanced/range_queries](D:\RustProjects\Project1\src\advanced\range_queries\mod.rs)
-- [src/advanced/tree_extensions](D:\RustProjects\Project1\src\advanced\tree_extensions\mod.rs)
+- [src/advanced/trees](D:\RustProjects\dsa_in_rust\src\advanced\trees\mod.rs)
+- [src/advanced/trie_topics](D:\RustProjects\dsa_in_rust\src\advanced\trie_topics\mod.rs)
+- [src/advanced/range_queries](D:\RustProjects\dsa_in_rust\src\advanced\range_queries\mod.rs)
+- [src/advanced/tree_extensions](D:\RustProjects\dsa_in_rust\src\advanced\tree_extensions\mod.rs)
 
 Recommended order:
 1. AVL tree
@@ -202,9 +202,9 @@ Recommended order:
 ### Step 2: Advanced Graphs
 
 Then move to:
-- [src/advanced/graphs](D:\RustProjects\Project1\src\advanced\graphs\mod.rs)
-- [src/advanced/graph_specialized](D:\RustProjects\Project1\src\advanced\graph_specialized\mod.rs)
-- [src/advanced/max_flow.rs](D:\RustProjects\Project1\src\advanced\max_flow.rs)
+- [src/advanced/graphs](D:\RustProjects\dsa_in_rust\src\advanced\graphs\mod.rs)
+- [src/advanced/graph_specialized](D:\RustProjects\dsa_in_rust\src\advanced\graph_specialized\mod.rs)
+- [src/advanced/max_flow.rs](D:\RustProjects\dsa_in_rust\src\advanced\max_flow.rs)
 
 Recommended order:
 1. Dijkstra
@@ -225,11 +225,11 @@ Recommended order:
 ### Step 3: Advanced DP, Greedy, And Backtracking
 
 Read:
-- [src/advanced/dynamic_programming](D:\RustProjects\Project1\src\advanced\dynamic_programming\mod.rs)
-- [src/advanced/greedy_topics](D:\RustProjects\Project1\src\advanced\greedy_topics\mod.rs)
-- [src/advanced/backtracking_topics](D:\RustProjects\Project1\src\advanced\backtracking_topics\mod.rs)
-- [src/advanced/computational_techniques](D:\RustProjects\Project1\src\advanced\computational_techniques\mod.rs)
-- [src/advanced/algorithm_design](D:\RustProjects\Project1\src\advanced\algorithm_design\mod.rs)
+- [src/advanced/dynamic_programming](D:\RustProjects\dsa_in_rust\src\advanced\dynamic_programming\mod.rs)
+- [src/advanced/greedy_topics](D:\RustProjects\dsa_in_rust\src\advanced\greedy_topics\mod.rs)
+- [src/advanced/backtracking_topics](D:\RustProjects\dsa_in_rust\src\advanced\backtracking_topics\mod.rs)
+- [src/advanced/computational_techniques](D:\RustProjects\dsa_in_rust\src\advanced\computational_techniques\mod.rs)
+- [src/advanced/algorithm_design](D:\RustProjects\dsa_in_rust\src\advanced\algorithm_design\mod.rs)
 
 Recommended order:
 1. DP on strings and subsequences
@@ -250,15 +250,15 @@ Recommended order:
 ### Step 4: Advanced Math, Strings, And Specialized Topics
 
 Read:
-- [src/advanced/math_topics](D:\RustProjects\Project1\src\advanced\math_topics\mod.rs)
-- [src/advanced/advanced_number_theory](D:\RustProjects\Project1\src\advanced\advanced_number_theory\mod.rs)
-- [src/advanced/algebra_polynomial](D:\RustProjects\Project1\src\advanced\algebra_polynomial\mod.rs)
-- [src/advanced/strings](D:\RustProjects\Project1\src\advanced\strings\mod.rs)
-- [src/advanced/string_ultra_advanced](D:\RustProjects\Project1\src\advanced\string_ultra_advanced\mod.rs)
-- [src/advanced/game_theory](D:\RustProjects\Project1\src\advanced\game_theory\mod.rs)
-- [src/advanced/practical_topics](D:\RustProjects\Project1\src\advanced\practical_topics\mod.rs)
-- [src/advanced/problem_solving_patterns](D:\RustProjects\Project1\src\advanced\problem_solving_patterns\mod.rs)
-- [src/advanced/misc_topics](D:\RustProjects\Project1\src\advanced\misc_topics\mod.rs)
+- [src/advanced/math_topics](D:\RustProjects\dsa_in_rust\src\advanced\math_topics\mod.rs)
+- [src/advanced/advanced_number_theory](D:\RustProjects\dsa_in_rust\src\advanced\advanced_number_theory\mod.rs)
+- [src/advanced/algebra_polynomial](D:\RustProjects\dsa_in_rust\src\advanced\algebra_polynomial\mod.rs)
+- [src/advanced/strings](D:\RustProjects\dsa_in_rust\src\advanced\strings\mod.rs)
+- [src/advanced/string_ultra_advanced](D:\RustProjects\dsa_in_rust\src\advanced\string_ultra_advanced\mod.rs)
+- [src/advanced/game_theory](D:\RustProjects\dsa_in_rust\src\advanced\game_theory\mod.rs)
+- [src/advanced/practical_topics](D:\RustProjects\dsa_in_rust\src\advanced\practical_topics\mod.rs)
+- [src/advanced/problem_solving_patterns](D:\RustProjects\dsa_in_rust\src\advanced\problem_solving_patterns\mod.rs)
+- [src/advanced/misc_topics](D:\RustProjects\dsa_in_rust\src\advanced\misc_topics\mod.rs)
 
 Recommended order:
 1. Extended Euclid, modular inverse, CRT, Fermat
