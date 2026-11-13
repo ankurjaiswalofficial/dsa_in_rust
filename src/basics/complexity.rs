@@ -115,6 +115,53 @@ pub fn has_duplicate_steps(items: &[u64]) -> (bool, u64) {
     (false, steps)
 }
 
+/// Best, worst and average step counts of linear search over `0..n`
+/// (DSA in Rust, episode 4).
+///
+/// Best case: the target is first (1 step). Worst case: the target is missing
+/// (n steps). Average over every target that is present: (n + 1) / 2 steps.
+///
+/// ```
+/// use project1::basics::complexity::linear_search_cases;
+///
+/// assert_eq!(linear_search_cases(1_000), (1, 1_000, 500.5));
+/// ```
+pub fn linear_search_cases(n: u64) -> (u64, u64, f64) {
+    let items: Vec<u64> = (0..n).collect();
+    let best = linear_scan_steps(&items, 0);
+    let worst = linear_scan_steps(&items, n);
+    let total: u64 = (0..n).map(|t| linear_scan_steps(&items, t)).sum();
+    (best, worst, total as f64 / n as f64)
+}
+
+/// Pushes `pushes` items into an empty `Vec` and returns
+/// `(reallocations, elements_moved)` (DSA in Rust, episode 4).
+///
+/// Every reallocation moves the items already stored. Because the capacity
+/// doubles, the total moved stays below 2 x the final capacity, so `push` is
+/// amortized O(1). Measured with Rust 1.100: 1,000,000 pushes -> 19
+/// reallocations and 1,048,572 moves (1.05 per push).
+///
+/// ```
+/// use project1::basics::complexity::vec_push_cost;
+///
+/// let (reallocations, moved) = vec_push_cost(1_000_000);
+/// assert!(reallocations < 30);
+/// assert!(moved < 2 * 1_000_000);
+/// ```
+pub fn vec_push_cost(pushes: usize) -> (usize, u64) {
+    let mut v: Vec<usize> = Vec::new();
+    let (mut reallocations, mut moved) = (0, 0u64);
+    for x in 0..pushes {
+        if v.len() == v.capacity() {
+            reallocations += 1;
+            moved += v.len() as u64;
+        }
+        v.push(x);
+    }
+    (reallocations, moved)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -151,5 +198,30 @@ mod tests {
         lucky[1] = 0;
         assert_eq!(linear_scan_steps(&lucky, 0), 1);
         assert_eq!(has_duplicate_steps(&lucky), (true, 1));
+    }
+
+    #[test]
+    fn linear_search_has_three_costs() {
+        assert_eq!(linear_search_cases(1_000), (1, 1_000, 500.5));
+        assert_eq!(linear_search_cases(1), (1, 1, 1.0));
+    }
+
+    #[test]
+    fn vec_push_is_amortized_constant() {
+        for n in [10usize, 1_000, 1_000_000] {
+            let (reallocations, moved) = vec_push_cost(n);
+            assert!(moved < 2 * n as u64, "n = {n}: moved {moved}");
+            assert!(reallocations <= (usize::BITS - n.leading_zeros()) as usize);
+        }
+    }
+
+    #[test]
+    fn with_capacity_never_reallocates() {
+        let mut v: Vec<u32> = Vec::with_capacity(10_000);
+        let start = v.capacity();
+        for x in 0..10_000 {
+            v.push(x);
+        }
+        assert_eq!(v.capacity(), start);
     }
 }
