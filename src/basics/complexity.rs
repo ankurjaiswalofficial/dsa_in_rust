@@ -76,6 +76,45 @@ pub fn practical_budget_hint(n: usize) -> &'static str {
     }
 }
 
+/// Linear scan that counts its comparisons (DSA in Rust, episode 1).
+///
+/// Worst case (target missing): `n` steps, O(n). Best case (target first): 1 step.
+///
+/// ```
+/// use project1::basics::complexity::linear_scan_steps;
+///
+/// let items: Vec<u64> = (0..1_000).collect();
+/// assert_eq!(linear_scan_steps(&items, 1_000), 1_000); // missing: every item checked
+/// assert_eq!(linear_scan_steps(&items, 0), 1); // at the front: one step
+/// ```
+pub fn linear_scan_steps(items: &[u64], target: u64) -> u64 {
+    let mut steps = 0;
+    for &x in items {
+        steps += 1;
+        if x == target {
+            break;
+        }
+    }
+    steps
+}
+
+/// Pairwise duplicate check that counts its comparisons (DSA in Rust, episode 1).
+///
+/// Worst case (no duplicate): n(n - 1) / 2 comparisons, which Big-O writes as O(n^2):
+/// the constant 1/2 and the lower term -n/2 are dropped.
+pub fn has_duplicate_steps(items: &[u64]) -> (bool, u64) {
+    let mut steps = 0;
+    for i in 0..items.len() {
+        for j in (i + 1)..items.len() {
+            steps += 1;
+            if items[i] == items[j] {
+                return (true, steps);
+            }
+        }
+    }
+    (false, steps)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -95,5 +134,22 @@ mod tests {
         assert!(amortized_analysis_summary().contains("Amortized"));
         assert!(case_analysis_summary().contains("worst case"));
         assert!(practical_budget_hint(50_000).contains("O(n log n)"));
+    }
+
+    #[test]
+    fn step_counts_grow_linearly_and_quadratically() {
+        for n in [1_000u64, 10_000] {
+            let items: Vec<u64> = (0..n).collect();
+            assert_eq!(linear_scan_steps(&items, n), n);
+            assert_eq!(has_duplicate_steps(&items), (false, n * (n - 1) / 2));
+        }
+    }
+
+    #[test]
+    fn best_case_is_one_step() {
+        let mut lucky: Vec<u64> = (0..100_000).collect();
+        lucky[1] = 0;
+        assert_eq!(linear_scan_steps(&lucky, 0), 1);
+        assert_eq!(has_duplicate_steps(&lucky), (true, 1));
     }
 }

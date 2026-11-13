@@ -15,6 +15,7 @@
 //! - Merge intervals
 //! - Rotate array
 //! - Subarrays
+//! - What each Vec operation costs (index, get, push, insert, remove, swap_remove)
 //!
 //! # Example
 //!
@@ -118,6 +119,63 @@ pub fn all_subarray_sums(values: &[i32]) -> Vec<i32> {
     sums
 }
 
+// ---------------------------------------------------------------------------
+// What each Vec operation costs (video: DSA in Rust, episode 2)
+//
+// - `v[i]` / `v.get(i)`: O(1). Element i lives at start + i * size_of::<T>(),
+//   so no element is visited. `v[i]` panics past the end, `get` returns None.
+// - `v.push(x)`: amortized O(1). When len == capacity the Vec moves to a block
+//   twice as big (4, 8, 16, ...), so n pushes copy fewer than 2n elements.
+//   `Vec::with_capacity(n)` reserves the room up front: no copies at all.
+// - `v.insert(0, x)` / `v.remove(0)`: O(n), every later element shifts.
+// - `v.swap_remove(i)`: O(1), the last element fills the gap (order changes).
+// - Searching by value: O(n). A Vec of n elements takes O(n) space.
+// ---------------------------------------------------------------------------
+
+/// Safe indexing: `None` instead of an out-of-bounds panic. O(1).
+pub fn get_checked(values: &[i32], index: usize) -> Option<i32> {
+    values.get(index).copied()
+}
+
+/// Pushes `n` elements and returns every capacity the Vec went through, plus how
+/// many elements the reallocations copied. Shows why push is amortized O(1).
+pub fn push_growth(n: usize) -> (Vec<usize>, usize) {
+    let mut values = Vec::new();
+    let mut capacities = Vec::new();
+    let mut copied = 0;
+    for item in 0..n {
+        if values.len() == values.capacity() {
+            copied += values.len();
+        }
+        values.push(item);
+        if capacities.last() != Some(&values.capacity()) {
+            capacities.push(values.capacity());
+        }
+    }
+    (capacities, copied)
+}
+
+/// O(1) delete that does not keep the order: the last element fills the gap.
+pub fn swap_delete_at(values: &[i32], index: usize) -> Vec<i32> {
+    let mut result = values.to_vec();
+    if index < result.len() {
+        result.swap_remove(index);
+    }
+    result
+}
+
+/// Linear search that also reports how many elements it looked at. O(n).
+pub fn linear_search_with_steps(values: &[i32], target: i32) -> (Option<usize>, usize) {
+    let mut steps = 0;
+    for (index, &value) in values.iter().enumerate() {
+        steps += 1;
+        if value == target {
+            return (Some(index), steps);
+        }
+    }
+    (None, steps)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -143,5 +201,23 @@ mod tests {
         assert_eq!(merge_intervals(&[(1, 3), (2, 6), (8, 10)]), vec![(1, 6), (8, 10)]);
         assert_eq!(rotate_right(&[1, 2, 3, 4], 1), vec![4, 1, 2, 3]);
         assert_eq!(all_subarray_sums(&[1, 2]), vec![1, 3, 2]);
+    }
+
+    #[test]
+    fn vec_operation_costs() {
+        assert_eq!(get_checked(&[70, 85, 90], 2), Some(90));
+        assert_eq!(get_checked(&[70, 85, 90], 3), None);
+
+        let (capacities, copied) = push_growth(1000);
+        assert!(capacities.windows(2).all(|w| w[1] >= 2 * w[0]), "capacity at least doubles");
+        assert!(copied < 2 * 1000, "amortized O(1): fewer than 2n copies");
+
+        assert_eq!(swap_delete_at(&[1, 2, 3, 4, 5], 0), vec![5, 2, 3, 4]);
+        assert_eq!(delete_at(&[1, 2, 3, 4, 5], 0), vec![2, 3, 4, 5]);
+
+        let values: Vec<i32> = (0..100).collect();
+        assert_eq!(linear_search_with_steps(&values, 0), (Some(0), 1));
+        assert_eq!(linear_search_with_steps(&values, 99), (Some(99), 100));
+        assert_eq!(linear_search_with_steps(&values, -1), (None, 100));
     }
 }

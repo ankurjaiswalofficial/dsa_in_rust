@@ -10,6 +10,7 @@
 //! - Hash set
 //! - Collision handling
 //! - Frequency count
+//! - Two Sum: brute force O(n^2) vs one-pass hash map O(n) (video: DSA in Rust, episode 3)
 //!
 //! # Example
 //!
@@ -86,6 +87,36 @@ pub fn frequency_count(text: &str) -> HashMap<char, usize> {
     counts
 }
 
+/// Two Sum, brute force: check every pair. O(n^2) time, O(1) extra space.
+///
+/// The inner loop starts at `i + 1`, so an element is never paired with itself
+/// (starting at 0 returns `(0, 0)` for `[3, 3]` with target 6).
+pub fn two_sum_brute(nums: &[i32], target: i32) -> Option<(usize, usize)> {
+    for i in 0..nums.len() {
+        for j in i + 1..nums.len() {
+            if nums[i] + nums[j] == target {
+                return Some((i, j));
+            }
+        }
+    }
+    None
+}
+
+/// Two Sum, one pass with a hash map: O(n) time, O(n) extra space.
+///
+/// For each number `x`, look up its complement `target - x` among the numbers
+/// seen so far, and only then remember `x`. Looking up first guarantees `j < i`.
+pub fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
+    let mut seen: HashMap<i32, usize> = HashMap::new(); // value -> index
+    for (i, &x) in nums.iter().enumerate() {
+        if let Some(&j) = seen.get(&(target - x)) {
+            return Some((j, i));
+        }
+        seen.insert(x, i);
+    }
+    None
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -105,5 +136,18 @@ mod tests {
         assert_eq!(map.get("y"), Some(&2));
         assert!(hash_set_contains(&["red", "green"], "green"));
         assert_eq!(frequency_count("banana").get(&'a'), Some(&3));
+    }
+
+    #[test]
+    fn two_sum_brute_and_hash_map_agree() {
+        for (nums, target, want) in [
+            (vec![2, 7, 11, 15], 9, Some((0, 1))),
+            (vec![3, 2, 4], 6, Some((1, 2))),
+            (vec![3, 3], 6, Some((0, 1))),
+            (vec![1, 2, 3], 100, None),
+        ] {
+            assert_eq!(two_sum_brute(&nums, target), want);
+            assert_eq!(two_sum(&nums, target), want);
+        }
     }
 }
