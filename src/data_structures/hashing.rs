@@ -11,6 +11,7 @@
 //! - Collision handling
 //! - Frequency count
 //! - Two Sum: brute force O(n^2) vs one-pass hash map O(n) (video: DSA in Rust, episode 3)
+//! - Contains Duplicate and Valid Anagram, three ways each (video: DSA in Rust, episode 9)
 //!
 //! # Example
 //!
@@ -117,6 +118,80 @@ pub fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
     None
 }
 
+/// Contains Duplicate, brute force: compare every pair. O(n^2) time, O(1) extra space.
+pub fn has_dup_brute(nums: &[i32]) -> bool {
+    for i in 0..nums.len() {
+        for j in i + 1..nums.len() {
+            if nums[i] == nums[j] {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+/// Contains Duplicate by sorting a copy: equal values end up side by side.
+/// O(n log n) time, O(n) extra space. `nums.sort()` on a `&[i32]` does not
+/// compile (E0596), and taking `&mut [i32]` would reorder the caller's data.
+pub fn has_dup_sort(nums: &[i32]) -> bool {
+    let mut v = nums.to_vec();
+    v.sort();
+    v.windows(2).any(|w| w[0] == w[1])
+}
+
+/// Contains Duplicate with a hash set: `insert` returns false for a value seen
+/// before. O(n) average time, O(n) extra space.
+pub fn has_dup_set(nums: &[i32]) -> bool {
+    let mut seen = std::collections::HashSet::new();
+    nums.iter().any(|&x| !seen.insert(x))
+}
+
+/// Valid Anagram by sorting both byte strings. O(n log n) time, O(n) space.
+pub fn is_anagram_sort(s: &str, t: &str) -> bool {
+    let mut a = s.as_bytes().to_vec();
+    let mut b = t.as_bytes().to_vec();
+    a.sort_unstable();
+    b.sort_unstable();
+    a == b
+}
+
+/// Valid Anagram with a `[i32; 26]` counting array: O(n) time, O(1) space.
+///
+/// Only `a..=z` fits the 26 slots: `b'R' - b'a'` would underflow ("attempt to
+/// subtract with overflow" in a debug build), so any other byte returns false.
+pub fn is_anagram_count(s: &str, t: &str) -> bool {
+    if s.len() != t.len() {
+        return false;
+    }
+    let mut count = [0i32; 26];
+    for b in s.bytes() {
+        if !b.is_ascii_lowercase() {
+            return false;
+        }
+        count[(b - b'a') as usize] += 1;
+    }
+    for b in t.bytes() {
+        if !b.is_ascii_lowercase() {
+            return false;
+        }
+        count[(b - b'a') as usize] -= 1;
+    }
+    count == [0; 26]
+}
+
+/// Valid Anagram for any characters, counting with a `HashMap<char, i32>`.
+/// O(n) average time, O(k) space for k distinct characters.
+pub fn is_anagram_map(s: &str, t: &str) -> bool {
+    let mut count: HashMap<char, i32> = HashMap::new();
+    for c in s.chars() {
+        *count.entry(c).or_insert(0) += 1;
+    }
+    for c in t.chars() {
+        *count.entry(c).or_insert(0) -= 1;
+    }
+    count.values().all(|&n| n == 0)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -149,5 +224,32 @@ mod tests {
             assert_eq!(two_sum_brute(&nums, target), want);
             assert_eq!(two_sum(&nums, target), want);
         }
+    }
+
+    #[test]
+    fn contains_duplicate_three_ways_agree() {
+        for f in [has_dup_brute, has_dup_sort, has_dup_set] {
+            assert!(f(&[1, 2, 3, 1]));
+            assert!(!f(&[1, 2, 3, 4]));
+            assert!(!f(&[]));
+            assert!(!f(&[7]));
+            assert!(f(&[-5, 0, -5]));
+        }
+        let original = [3, 1, 2];
+        has_dup_sort(&original);
+        assert_eq!(original, [3, 1, 2]); // the caller's data is not reordered
+    }
+
+    #[test]
+    fn valid_anagram_three_ways_agree() {
+        for f in [is_anagram_sort, is_anagram_count, is_anagram_map] {
+            assert!(f("anagram", "nagaram"));
+            assert!(!f("rat", "car"));
+            assert!(!f("ab", "abc"));
+            assert!(f("", ""));
+            assert!(!f("Rat", "tar"));
+        }
+        assert!(is_anagram_map("über", "rübe"));
+        assert!(!is_anagram_count("über", "rübe")); // outside a..=z
     }
 }
